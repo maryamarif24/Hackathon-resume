@@ -1,0 +1,350 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Resume Builder</title>
+    <style>
+        /* Basic Styles */
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f4f4f4;
+            margin: 0;
+            padding: 0;
+        }
+        .container {
+            max-width: 800px;
+            margin: 20px auto;
+            background-color: #fff;
+            padding: 20px;
+            box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+        }
+        h2, h3 {
+            color: #333;
+            margin-bottom: 10px;
+        }
+        label {
+            font-weight: bold;
+        }
+        input, select, textarea {
+            width: 100%;
+            padding: 10px;
+            margin: 10px 0 20px 0;
+            border: 1px solid #ccc;
+            border-radius: 4px;
+            box-sizing: border-box;
+        }
+        button {
+            background-color: #4CAF50;
+            color: white;
+            padding: 10px 15px;
+            border: none;
+            border-radius: 4px;
+            cursor: pointer;
+            width: 100%;
+            font-size: 1rem;
+        }
+        button:hover {
+            background-color: #45a049;
+        }
+
+        /* Resume Styles */
+        .resume {
+            display: none;
+            margin-top: 30px;
+            background-color: #fff;
+            padding: 20px;
+            border-radius: 5px;
+            box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+        }
+        .resume h2, .resume h3 {
+            color: #333;
+        }
+        .resume .section-title {
+            border-bottom: 2px solid #4CAF50;
+            padding-bottom: 5px;
+            margin-bottom: 15px;
+        }
+        .resume p {
+            margin: 5px 0;
+        }
+        .resume .header {
+            display: flex;
+            justify-content: space-between;
+            margin-bottom: 20px;
+            flex-wrap: wrap;
+        }
+        .resume .header div {
+            flex-basis: 45%;
+        }
+        .resume .contact-info p {
+            margin: 5px 0;
+            font-size: 0.9rem;
+        }
+        .resume .main-info {
+            margin-top: 20px;
+        }
+        .resume .section {
+            margin-bottom: 20px;
+        }
+        .resume ul {
+            list-style-type: disc;
+            padding-left: 20px;
+        }
+
+        /* Responsive Design */
+        @media (max-width: 768px) {
+            .container {
+                padding: 10px;
+                margin: 10px;
+            }
+            h2, h3 {
+                font-size: 1.4rem;
+            }
+            input, select, textarea {
+                padding: 8px;
+                margin: 8px 0 15px 0;
+            }
+            button {
+                padding: 12px;
+                font-size: 1rem;
+            }
+            .resume .header {
+                flex-direction: column;
+            }
+            .resume .header div {
+                flex-basis: 100%;
+                margin-bottom: 10px;
+            }
+        }
+
+        @media (max-width: 480px) {
+            .container {
+                padding: 5px;
+                margin: 5px;
+            }
+            h2, h3 {
+                font-size: 1.2rem;
+            }
+            input, select, textarea {
+                padding: 6px;
+                margin: 6px 0 10px 0;
+            }
+            button {
+                padding: 10px;
+                font-size: 0.9rem;
+            }
+        }
+    </style>
+</head>
+<body>
+
+<div class="container">
+    <h2>Resume Builder</h2>
+    <form id="resumeForm">
+        <!-- Personal Information -->
+        <h3>Personal Information</h3>
+        <label for="name">Full Name</label>
+        <input type="text" id="name" name="name" required>
+
+        <label for="email">Email</label>
+        <input type="email" id="email" name="email" required>
+
+        <label for="phone">Phone Number</label>
+        <input type="tel" id="phone" name="phone" required>
+
+        <label for="address">Address</label>
+        <textarea id="address" name="address" rows="2" required></textarea>
+
+        <!-- Work Experience -->
+        <h3>Work Experience</h3>
+        <label for="company">Company</label>
+        <input type="text" id="company" name="company" required>
+
+        <label for="role">Role</label>
+        <input type="text" id="role" name="role" required>
+
+        <label for="startdate">Start Date</label>
+        <input type="date" id="startdate" name="startdate" required>
+
+        <label for="enddate">End Date</label>
+        <input type="date" id="enddate" name="enddate">
+
+        <label for="description">Description of Role</label>
+        <textarea id="description" name="description" rows="3" required></textarea>
+
+        <!-- Education -->
+        <h3>Education</h3>
+        <label for="school">School/University</label>
+        <input type="text" id="school" name="school" required>
+
+        <label for="degree">Degree</label>
+        <input type="text" id="degree" name="degree" required>
+
+        <label for="graduationdate">Graduation Date</label>
+        <input type="date" id="graduationdate" name="graduationdate" required>
+
+        <!-- Skills -->
+        <h3>Skills</h3>
+        <label for="skills">Skills (comma-separated)</label>
+        <textarea id="skills" name="skills" rows="3" required></textarea>
+
+        <!-- Certifications -->
+        <h3>Certifications</h3>
+        <label for="certifications">Certifications (comma-separated)</label>
+        <textarea id="certifications" name="certifications" rows="3"></textarea>
+
+        <!-- Additional Information -->
+        <h3>Additional Information</h3>
+        <label for="additionalInfo">Additional Information</label>
+        <textarea id="additionalInfo" name="additionalInfo" rows="3"></textarea>
+
+        <!-- Submit Button -->
+        <button type="submit">Generate Resume</button>
+    </form>
+
+    <!-- Resume Layout -->
+    <div class="resume" id="resumeLayout">
+        <div class="header">
+            <div>
+                <h2 id="resumeName"></h2>
+                <div class="contact-info">
+                    <p id="resumeEmail"></p>
+                    <p id="resumePhone"></p>
+                    <p id="resumeAddress"></p>
+                </div>
+            </div>
+        </div>
+
+        <div class="main-info">
+            <!-- Work Experience Section -->
+            <div class="section">
+                <h3 class="section-title">Work Experience</h3>
+                <p><strong>Company:</strong> <span id="resumeCompany"></span></p>
+                <p><strong>Role:</strong> <span id="resumeRole"></span></p>
+                <p><strong>Duration:</strong> <span id="resumeStartDate"></span> to <span id="resumeEndDate"></span></p>
+                <p><strong>Description:</strong> <span id="resumeDescription"></span></p>
+            </div>
+
+            <!-- Education Section -->
+            <div class="section">
+                <h3 class="section-title">Education</h3>
+                <p><strong>School/University:</strong> <span id="resumeSchool"></span></p>
+                <p><strong>Degree:</strong> <span id="resumeDegree"></span></p>
+                <p><strong>Graduation Date:</strong> <span id="resumeGraduationDate"></span></p>
+            </div>
+
+            <!-- Skills Section -->
+            <div class="section">
+                <h3 class="section-title">Skills</h3>
+                <ul id="resumeSkills"></ul>
+            </div>
+
+            <!-- Certifications Section -->
+            <div class="section">
+                <h3 class="section-title">Certifications</h3>
+                <ul id="resumeCertifications"></ul>
+            </div>
+
+            <!-- Additional Information Section -->
+            <div class="section">
+                <h3 class="section-title">Additional Information</h3>
+                <p id="resumeAdditionalInfo"></p>
+            </div>
+        </div>
+    </div>
+</div>
+
+<script>
+    /**
+     * Formats a date string (YYYY-MM-DD) into a more readable format (e.g., "January 2020").
+     * @param {string} dateStr - The date string to format.
+     * @returns {string} - The formatted date string.
+     */
+    function formatDate(dateStr) {
+        if (!dateStr) return '';
+        const options = { year: 'numeric', month: 'long' };
+        const date = new Date(dateStr);
+        return date.toLocaleDateString(undefined, options);
+    }
+
+    /**
+     * Handles the form submission, captures user input, and dynamically populates the resume layout.
+     */
+    document.getElementById('resumeForm').addEventListener('submit', function(event) {
+        event.preventDefault(); // Prevent form from submitting normally
+
+        // Capture form data
+        const name = document.getElementById('name').value.trim();
+        const email = document.getElementById('email').value.trim();
+        const phone = document.getElementById('phone').value.trim();
+        const address = document.getElementById('address').value.trim();
+
+        const company = document.getElementById('company').value.trim();
+        const role = document.getElementById('role').value.trim();
+        const startdate = formatDate(document.getElementById('startdate').value);
+        const enddateRaw = document.getElementById('enddate').value;
+        const enddate = enddateRaw ? formatDate(enddateRaw) : 'Present';
+        const description = document.getElementById('description').value.trim();
+
+        const school = document.getElementById('school').value.trim();
+        const degree = document.getElementById('degree').value.trim();
+        const graduationdate = formatDate(document.getElementById('graduationdate').value);
+
+        const skillsInput = document.getElementById('skills').value.trim();
+        const skills = skillsInput.split(',').map(skill => skill.trim()).filter(skill => skill.length > 0);
+
+        const certificationsInput = document.getElementById('certifications').value.trim();
+        const certifications = certificationsInput.split(',').map(cert => cert.trim()).filter(cert => cert.length > 0);
+
+        const additionalInfo = document.getElementById('additionalInfo').value.trim();
+
+        // Populate the resume with captured data
+        document.getElementById('resumeName').textContent = name;
+        document.getElementById('resumeEmail').textContent = `Email: ${email}`;
+        document.getElementById('resumePhone').textContent = `Phone: ${phone}`;
+        document.getElementById('resumeAddress').textContent = `Address: ${address}`;
+
+        document.getElementById('resumeCompany').textContent = company;
+        document.getElementById('resumeRole').textContent = role;
+        document.getElementById('resumeStartDate').textContent = startdate;
+        document.getElementById('resumeEndDate').textContent = enddate;
+        document.getElementById('resumeDescription').textContent = description;
+
+        document.getElementById('resumeSchool').textContent = school;
+        document.getElementById('resumeDegree').textContent = degree;
+        document.getElementById('resumeGraduationDate').textContent = graduationdate;
+
+        // Populate Skills as a list
+        const skillsList = document.getElementById('resumeSkills');
+        skillsList.innerHTML = ''; // Clear previous entries
+        skills.forEach(skill => {
+            const li = document.createElement('li');
+            li.textContent = skill;
+            skillsList.appendChild(li);
+        });
+
+        // Populate Certifications as a list
+        const certificationsList = document.getElementById('resumeCertifications');
+        certificationsList.innerHTML = ''; // Clear previous entries
+        certifications.forEach(cert => {
+            const li = document.createElement('li');
+            li.textContent = cert;
+            certificationsList.appendChild(li);
+        });
+
+        // Populate Additional Information
+        document.getElementById('resumeAdditionalInfo').textContent = additionalInfo;
+
+        // Display the resume
+        document.getElementById('resumeLayout').style.display = 'block';
+
+        // Optionally, scroll to the resume section
+        document.getElementById('resumeLayout').scrollIntoView({ behavior: 'smooth' });
+    });
+</script>
+
+</body>
+</html>
+
+

@@ -1,0 +1,185 @@
+<!DOCTYPE html>
+<html lang="en-US" prefix="og: https://ogp.me/ns#">
+
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+
+    <title>Static Resume Builder</title>
+
+    <link rel="stylesheet" type="text/css" href="style.css">
+    <script src="script.js"></script>
+    <a href="#resume_builder.html"></a>
+
+    <!-- Preloads for optimized loading -->
+    <link rel="preload" href="https://staticresumebuilder.com/wp-content/uploads/hero-resume-32-interface.webp" as="image" media="(min-width: 561px)">
+    <link rel="preload" href="https://staticresumebuilder.com/wp-content/uploads/hero-resume-32-interface_700x436.webp" as="image" media="(max-width: 560px)">
+    <link rel="preload" href="https://staticresumebuilder.com/wp-content/themes/genesis-rg-v3/images/resume-genius-logo.svg" as="image">
+    <link rel="preload" href="https://staticresumebuilder.com/wp-content/themes/genesis-rg-v3/fonts/inter/inter.woff2" as="font" type="font/woff2" crossorigin>
+    <link rel="preload" href="https://staticresumebuilder.com/wp-content/themes/genesis-rg-v3/fonts/lexend/lexend.woff2" as="font" type="font/woff2" crossorigin>
+    <link rel="preconnect" href="https://www.googletagmanager.com" crossorigin>
+    <link rel="preconnect" href="https://analytics.google.com" crossorigin>
+</head>
+
+<body>
+    <header>
+        <nav class="navbar"> 
+
+            <div class="search-bar">
+                <button id="search-button" > <a href="#resume"></a>Create Yours</button>
+            </div>
+
+            <div class="menu-toggle">
+                <span class="bar"></span>
+                <span class="bar"></span>
+                <span class="bar"></span>
+            </div>
+        </nav>
+    </header>
+
+    
+    <div class="hero-section-set">
+        <div class="tlogo" id="logo">
+            <img src="Images/logo.png" alt="Logo">
+        </div>
+
+        <main class="hero-section" id="hero-section">
+            <div class="hero-section-content">
+                <h1 class="hero-section-title">You are your Reflection!</h1>
+                <p class="hero-section-sub-heading">
+                    The way you showcase matters the most. Be original and show the potential!
+                </p>
+            </div>
+            <img src="Images/scrdwn.png" class="scroll-down-icon" alt="scroll down indicator">
+        </main>
+
+        <div class="background">
+            <img src="Images/bg3.PNG" class="background-image" alt="Background">
+            <div class="grid-slider">
+                <div class="grid-item hide"></div>
+                <div class="grid-item hide"></div>
+                <div class="grid-item hide"></div>
+                <div class="grid-item hide"></div>
+                <div class="grid-item hide"></div>
+                <div class="grid-item hide"></div>
+            </div>
+        </div>
+    </div>
+
+
+	<!-- create section -->
+
+    <div class="container" id="resume">
+        <h2>Resume Builder</h2>
+        <form id="resumeForm">
+            <h3>Personal Information</h3>
+            <label for="name">Full Name</label>
+            <input type="text" id="name" name="name" required placeholder="Maryam Arif">
+    
+            <label for="email">Email</label>
+            <input type="email" id="email" name="email" required placeholder="maryam@example.com">
+    
+            <label for="phone">Phone Number</label>
+            <input type="tel" id="phone" name="phone" required placeholder="+123 456 789">
+    
+            <label for="address">Address</label>
+            <textarea id="address" name="address" rows="2" required placeholder="abc#3 x-villa, country"></textarea>
+    
+            <h3>Work Experience</h3>
+            <label for="company">Company</label>
+            <input type="text" id="company" name="company" required placeholder="Microsoft, Google">
+    
+            <label for="role">Role</label>
+            <input type="text" id="role" name="role" required placeholder="Software Engineer">
+    
+            <label for="startdate">Start Date</label>
+            <input type="date" id="startdate" name="startdate" required placeholder="9/2/2010">
+    
+            <label for="enddate">End Date</label>
+            <input type="date" id="enddate" name="enddate" placeholder="9/2/2024">
+    
+            <label for="description">Description of Role</label>
+            <textarea id="description" name="description" rows="3" required placeholder="I am currently serving as....."></textarea>
+    
+            <h3>Education</h3>
+            <label for="school">School/University</label>
+            <input type="text" id="school" name="school" required placeholder="University of Stanford">
+    
+            <label for="degree">Degree</label>
+            <input type="text" id="degree" name="degree" required placeholder="Bachelors of Science">
+    
+            <label for="graduationdate">Graduation Date</label>
+            <input type="date" id="graduationdate" name="graduationdate" required placeholder="Start Date...">
+    
+            <h3>Skills</h3>
+            <label for="skills">Skills (comma-separated)</label>
+            <textarea id="skills" name="skills" rows="3" required placeholder="Engineering, Developer, ....."></textarea>
+    
+            <h3>Certifications</h3>
+            <label for="certifications">Certifications (comma-separated)</label>
+            <textarea id="certifications" name="certifications" rows="3" placeholder="Google-certified, ....."></textarea>
+    
+            <h3>Additional Information</h3>
+            <label for="additionalInfo">Additional Information</label>
+            <textarea id="additionalInfo" name="additionalInfo" rows="3" placeholder="Tell about Yourself...."></textarea>
+    
+            <button type="submit">Generate Resume</button>
+        </form>
+    </div>
+
+    <div class="resume" id="resumeLayout"></div>
+        <div class="header">
+            <div>
+                <h2>Resume</h2>
+                <div class="contact-info">
+                    <p id="resumeName">Name: </p>
+                    <p id="resumeEmail">Email: </p>
+                    <p id="resumePhone">Phone Number: </p>
+                    <p id="resumeAddress">Address: </p>
+                </div>
+            </div>
+        </div>
+
+        <div class="main-info">
+            
+            
+            <div class="section">
+                <h3 class="section-title">Work Experience</h3>
+                <p><strong>Company:</strong> <span id="resumeCompany"></span></p>
+                <p><strong>Role:</strong> <span id="resumeRole"></span></p>
+                <p><strong>Duration:</strong> <span id="resumeStartDate"></span> to <span id="resumeEndDate"></span></p>
+                <p><strong>Description:</strong> <span id="resumeDescription"></span></p>
+            </div>
+
+            <div class="section">
+                <h3 class="section-title">Education</h3>
+                <p><strong>School/University:</strong> <span id="resumeSchool"></span></p>
+                <p><strong>Degree:</strong> <span id="resumeDegree"></span></p>
+                <p><strong>Graduation Date:</strong> <span id="resumeGraduationDate"></span></p>
+            </div>
+
+            <div class="section">
+                <h3 class="section-title">Skills</h3>
+                <p id="resumeSkills"></p>
+            </div>
+
+            <div class="section">
+                <h3 class="section-title">Certifications</h3>
+                <p id="resumeCertifications"></p>
+            </div>
+
+            <div class="section">
+                <h3 class="section-title">Additional Information</h3>
+                <p id="resumeAdditionalInfo"></p>
+            </div>
+        </div>
+    </div>
+    
+
+
+
+    <!-- Scripts -->
+    <script src="script.js"></script>
+</body>
+</html>
